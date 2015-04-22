@@ -276,7 +276,9 @@
      */
 
     Images.prototype.showImage = function (img, data) {
-        var $place, domImage;
+        var $place, domImage, that;
+
+        that = this;
 
         // If preview is allowed and preview image already exists,
         // replace it with uploaded image
@@ -284,6 +286,7 @@
             domImage = this.getDOMImage();
             domImage.onload = function () {
                 data.context.find('img').attr('src', domImage.src);
+                that.$el.trigger('input');
             };
             domImage.src = img;
         } else {
